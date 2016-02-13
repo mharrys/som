@@ -44,17 +44,8 @@ for a = 1, animals do
     pos[a] = closest(props[a], weights, rows)
 end
 
--- convert values in position array to array of indices which prints values in
--- the position array in order
-local order = {}
-for i = 1, rows do
-    local indices = pos:eq(i)
-    for j = 1, indices:size()[1] do
-        if indices[j] == 1 then
-            table.insert(order, j)
-        end
-    end
-end
+-- indices for sorted order in pos
+_, order = torch.sort(pos)
 
 -- print animale names, animals that are similar will be close in the list
 for a = 1, animals do
